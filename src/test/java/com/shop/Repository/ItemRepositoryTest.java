@@ -48,15 +48,24 @@ class ItemRepositoryTest {
             Item savedItem = itemRepository.save(item);
         }
     }
+//
+//    @Test
+//    @DisplayName("상품명 조회 테스트")
+//    public void findByItemNmTest(){
+//        this.createItemList(); //테스트 상품을 만드는 메소드를 실행하여 조회할 대상을 만들어 줌 !
+//        List<Item> itemList = itemRepository.findByItemNm("테스트 상품1"); //메소드 호출 뒤 파라미터로 "테스트 상품1" 상품명 전달
+//        for(Item item : itemList){
+//            System.out.println(item.toString());
+//        }
+//    }
 
     @Test
-    @DisplayName("상품명 조회 테스트")
-    public void findByItemNmTest(){
-        this.createItemList(); //이거 의미가 뭘까..?
-        List<Item> itemList = itemRepository.findByItemNm("테스트 상품1"); //메소드 호출 뒤 파라미터로 "테스트 상품1" 상품명 전달
-        for(Item item : itemList){
+    @DisplayName("상품명, 상품상세설명 or 테스트")
+    public void findByItemNmOrItemDetailTest(){
+        this.createItemList();
+        List<Item> itemList = itemRepository.findByItemNmOrItemDetail("테스트 상품1","테스트 상품 상세 설명5");
+        for(Item item : itemList){ // item의 내용을 itemList에 할당해주는?
             System.out.println(item.toString());
         }
     }
-
 }
