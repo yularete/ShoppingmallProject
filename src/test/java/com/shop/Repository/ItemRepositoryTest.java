@@ -59,13 +59,24 @@ class ItemRepositoryTest {
 //        }
 //    }
 
+//    @Test
+//    @DisplayName("상품명, 상품상세설명 or 테스트")
+//    public void findByItemNmOrItemDetailTest(){
+//        this.createItemList();
+//        List<Item> itemList = itemRepository.findByItemNmOrItemDetail("테스트 상품1","테스트 상품 상세 설명5");
+//        for(Item item : itemList){ // item의 내용을 itemList에 할당해주는?
+//            System.out.println(item.toString());
+//        }
+//    }
+
     @Test
-    @DisplayName("상품명, 상품상세설명 or 테스트")
-    public void findByItemNmOrItemDetailTest(){
+    @DisplayName("가격 LessThan 테스트")
+    public void findByPriceLessThanTest(){
         this.createItemList();
-        List<Item> itemList = itemRepository.findByItemNmOrItemDetail("테스트 상품1","테스트 상품 상세 설명5");
-        for(Item item : itemList){ // item의 내용을 itemList에 할당해주는?
+        List<Item> itemList = itemRepository.findByPriceLessThan(10005);
+        for (Item item : itemList){
             System.out.println(item.toString());
         }
     }
+
 }
