@@ -46,4 +46,17 @@ class MemberServiceTest {
         assertEquals(member.getRole(),savedMember.getRole());
     }
 
+    @Test
+    @DisplayName("중복 회원 가입 테스트")
+    public void saveDuplicateMemberTest(){
+        Member member1 = createMember();
+        Member member2 = createMember();
+        memberService.saveMember(member1);
+
+        Throwable e = assertThrows(IllegalArgumentException.class, () -> { //예외처리 테스트
+            memberService.saveMember(member2);});
+        
+        assertEquals("이미 가입된 회원입니다.", e.getMessage()); //발생한 예외 메시지가 예상 결과와 맞는지 검증
+    }
+
 }
