@@ -28,13 +28,13 @@ public class MemberController {
         return "member/memberForm";
     }
 
-    @PostMapping(value="/new")
-    public String memberForm(MemberFormDto memberFormDto){
-        Member member = Member.createMember(memberFormDto, passwordEncoder);
-        memberService.saveMember(member);
-
-        return "redirect:/";
-    }
+//    @PostMapping(value="/new")
+//    public String memberForm(MemberFormDto memberFormDto){
+//        Member member = Member.createMember(memberFormDto, passwordEncoder);
+//        memberService.saveMember(member);
+//
+//        return "redirect:/";
+//    }
     @PostMapping(value = "/new")
     public String newMember(@Valid MemberFormDto memberFormDto, BindingResult bindingResult, Model model){
         //검증하려는 객체의 앞에 @Vailid 어노테이션을 선언, 파라미터로 bindingResult 객체 추가.
