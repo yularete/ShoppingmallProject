@@ -60,4 +60,17 @@ class MemberControllerTest {
                 .andExpect(SecurityMockMvcResultMatchers.authenticated());
     }
 
+    @Test
+    @DisplayName("로그인 실패 테스트")
+    public void loginFailTest() throws Exception{
+        String email = "test@email.com";
+        String password = "1234";
+        this.createMember(email, password);
+        mockMvc.perform(formLogin().userParameter("email")
+                .loginProcessingUrl("/members/login")
+                .user(email).password("12345"))
+                //인증되지 않은 결과 값이 출력되어 결국 테스트는 통과...
+                .andExpect(SecurityMockMvcResultMatchers.unauthenticated());
+    }
+
 }
