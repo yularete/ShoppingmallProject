@@ -27,6 +27,11 @@ class MemberControllerTest {
     @Autowired //필요한 의존 객체의 "타입"에 해당하는 빈을 찾아 주입. 기분값이 true = 주입 대상이 없다면 구동에 실패???
     private MemberService memberService; //왜 생성자에 빈을 주입하죠...?
 
+    //MockMvc 클래스를 이용해 실제 객체와 비슷하지만 테스트에 필요한 기능만 가지는 가짜 객체를.
+    //MockMvc객체를 이용하면 웹 브라우저에서 요청을 하는 것처럼 테스트 할 수 있다.
+    @Autowired
+    private MockMvc mockMvc;
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -40,5 +45,19 @@ class MemberControllerTest {
         Member member = Member.createMember(memberFormDto, passwordEncoder);
         return memberService.saveMember(member);
     }
+
+    @Test
+    @DisplayName("로그인 성공 테스트")
+    public void loginSuccessTest() throws Exception{
+        String email = "test@email.com";
+        String password = "1234";
+        this.createMember(email, password);
+
+        //userParameter()를 이용해 이메일을 아이디로 세팅하고 로그인 URL에 요청한다.
+        mockMvc.perform(formLogin().userParameter("email")
+                .loginProcessingUrl("/members/login")
+                .user(email).password(password))
+                .andExpect(SecurityMockMvcResultMatchers.authenticated());
     }
+
 }
