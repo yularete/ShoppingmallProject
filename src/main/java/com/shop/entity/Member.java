@@ -40,7 +40,7 @@ public class Member {
         member.setAdress(memberFormDto.getAddress());
         String password = passwordEncoder.encode(memberFormDto.getPassword());//Bc~der Bean을 파라미터로 넘겨 암호화
         member.setPassword(password);
-        member.setRole(Role.USER);
+        member.setRole(Role.ADMIN);
         return member;
     }
 }
