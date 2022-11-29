@@ -1,6 +1,7 @@
 package com.shop.entity;
 
 import com.shop.Repository.ItemRepository;
+import com.shop.Repository.MemberRepository;
 import com.shop.Repository.OrderRepository;
 import com.shop.constant.ItemSellStatus;
 import org.aspectj.weaver.ast.Or;
@@ -33,7 +34,10 @@ class OrderTest {
     @PersistenceContext
     EntityManager em;
 
-    public Item createItem(){
+    @Autowired
+    MemberRepository memberRepository;
+
+    public Item createItem() {
         Item item = new Item();
         item.setItemNm("테스트 상품");
         item.setPrice(10000);
@@ -47,11 +51,11 @@ class OrderTest {
 
     @Test
     @DisplayName("영속성 전이 테스트")
-    public void cascadeTest(){
+    public void cascadeTest() {
 
         Order order = new Order();
 
-        for (int i =0; i<3;i++){
+        for (int i = 0; i < 3; i++) {
             Item item = this.createItem();
             itemRepository.save(item);
             OrderItem orderItem = new OrderItem();
@@ -72,5 +76,36 @@ class OrderTest {
         Order savedOrder = orderRepository.findById(order.getId()).orElseThrow(EntityNotFoundException::new);
         assertEquals(3, savedOrder.getOrderItems().size());
         //itemOrder 엔티티 3개가 실제로 데이터 베이스에 저장되었는지 검사.
+    }
+
+    public Order createOrder() {
+        Order order = new Order();
+
+        for (int i = 0; i < 3; i++) {
+            Item item = this.createItem();
+            itemRepository.save(item);
+            OrderItem orderItem = new OrderItem();
+            orderItem.setItem(item);
+            orderItem.setCount(10);
+            orderItem.setOrderPrice(1000);
+            orderItem.setOrder(order);
+            //아직 영속성 컨텍스트에 저장되지 않은 orderItem Entity를 Order 엔티티에 담아준다.
+            order.getOrderItems().add(orderItem);
+        }
+        Member member = new Member();
+        memberRepository.save(member);
+
+        order.setMember(member);
+        orderRepository.save(order);
+        return order;
+    }
+
+    @Test
+    @DisplayName("고아객체 제거 테스트")
+    public void orphanRemovalTest(){
+        Order order = this.createOrder();
+        //order 엔티티에서 관리하고 있는 orderItem 리스트의 0번째 인덱스 요소를 제거한다.
+        order.getOrderItems().remove(0);
+        em.flush();
     }
 }
