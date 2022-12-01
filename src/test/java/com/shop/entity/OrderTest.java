@@ -126,5 +126,6 @@ class OrderTest {
                 .orElseThrow(EntityNotFoundException::new);
         //orderItem 엔티티에 있는 order 객체의 클래스를 출력. Order 클래스가 출력된다...
         System.out.println("Order class : " + orderItem.getOrder().getClass());
+        orderItem.getOrder().getOrderDate();
     }
 }
