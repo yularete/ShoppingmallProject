@@ -2,6 +2,7 @@ package com.shop.entity;
 
 import com.shop.Repository.ItemRepository;
 import com.shop.Repository.MemberRepository;
+import com.shop.Repository.OrderItemRepository;
 import com.shop.Repository.OrderRepository;
 import com.shop.constant.ItemSellStatus;
 import org.aspectj.weaver.ast.Or;
@@ -36,6 +37,9 @@ class OrderTest {
 
     @Autowired
     MemberRepository memberRepository;
+
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     public Item createItem() {
         Item item = new Item();
@@ -107,5 +111,20 @@ class OrderTest {
         //order 엔티티에서 관리하고 있는 orderItem 리스트의 0번째 인덱스 요소를 제거한다.
         order.getOrderItems().remove(0);
         em.flush();
+    }
+
+    @Test
+    @DisplayName("지연 로딩 테스트")
+    public void lazyLoadingTest(){
+        Order order = this.createOrder();
+        Long orderItemId = order.getOrderItems().get(0).getId();
+        em.flush();
+        em.clear();
+
+        // 영속성 컨텍스트의 상태 초기화 후 order 엔티티에 저장했던 주문 상품 아이디를 이용하여 orderItem을 db에서 다시 조회
+        OrderItem orderItem = orderItemRepository.findById(orderItemId)
+                .orElseThrow(EntityNotFoundException::new);
+        //orderItem 엔티티에 있는 order 객체의 클래스를 출력. Order 클래스가 출력된다...
+        System.out.println("Order class : " + orderItem.getOrder().getClass());
     }
 }
