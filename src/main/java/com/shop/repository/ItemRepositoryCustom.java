@@ -1,4 +1,4 @@
-package com.shop.Repository;
+package com.shop.repository;
 
 import com.shop.dto.ItemSearchDto;
 import com.shop.entity.Item;

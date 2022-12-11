@@ -1,7 +1,7 @@
 package com.shop.service;
 
-import com.shop.Repository.ItemImgRepository;
-import com.shop.Repository.ItemRepository;
+import com.shop.repository.ItemImgRepository;
+import com.shop.repository.ItemRepository;
 import com.shop.constant.ItemSellStatus;
 import com.shop.dto.ItemFormDto;
 import com.shop.entity.Item;

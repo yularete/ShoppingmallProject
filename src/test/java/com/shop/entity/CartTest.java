@@ -1,7 +1,7 @@
 package com.shop.entity;
 
-import com.shop.Repository.CartRepository;
-import com.shop.Repository.MemberRepository;
+import com.shop.repository.CartRepository;
+import com.shop.repository.MemberRepository;
 import com.shop.dto.MemberFormDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

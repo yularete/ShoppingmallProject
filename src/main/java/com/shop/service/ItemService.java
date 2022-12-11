@@ -1,13 +1,12 @@
 package com.shop.service;
 
-import com.shop.Repository.ItemImgRepository;
-import com.shop.Repository.ItemRepository;
+import com.shop.repository.ItemImgRepository;
+import com.shop.repository.ItemRepository;
 import com.shop.dto.ItemFormDto;
 import com.shop.dto.ItemImgDto;
 import com.shop.entity.Item;
 import com.shop.entity.ItemImg;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

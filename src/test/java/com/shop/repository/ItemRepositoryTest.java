@@ -1,4 +1,4 @@
-package com.shop.Repository;
+package com.shop.repository;
 
 import com.shop.constant.ItemSellStatus;
 import com.shop.entity.Item;
@@ -9,9 +9,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
 import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.properties")

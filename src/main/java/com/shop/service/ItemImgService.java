@@ -1,6 +1,6 @@
 package com.shop.service;
 
-import com.shop.Repository.ItemImgRepository;
+import com.shop.repository.ItemImgRepository;
 import com.shop.entity.ItemImg;
 import lombok.Value;
 import org.springframework.web.multipart.MultipartFile;

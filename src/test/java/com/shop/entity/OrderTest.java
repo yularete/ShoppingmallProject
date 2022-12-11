@@ -1,11 +1,10 @@
 package com.shop.entity;
 
-import com.shop.Repository.ItemRepository;
-import com.shop.Repository.MemberRepository;
-import com.shop.Repository.OrderItemRepository;
-import com.shop.Repository.OrderRepository;
+import com.shop.repository.ItemRepository;
+import com.shop.repository.MemberRepository;
+import com.shop.repository.OrderItemRepository;
+import com.shop.repository.OrderRepository;
 import com.shop.constant.ItemSellStatus;
-import org.aspectj.weaver.ast.Or;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
